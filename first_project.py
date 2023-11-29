@@ -1,26 +1,30 @@
 from random import randint
 
 
-class Character:
+class MelleeWeapon:
 
-    RANGE_VALUE_ATTACK = (1, 10)
+    RANGE_VALUE_ATTACK = (0, 10)
 
-    FIRST_ATTACK: int = 10
-    SECOND_ATTACK: int = 15
-    DEFENCE: int = 30
-
-    def __init__(self, attack: int, deffence: int):
+    ATTACK: float = 10
+        
+    def __init__(self, attack: float,
+                 attack_speed: float,
+                 critikal_attack: float):
         self.attack = attack
-        self.deffence = deffence
+        self.attack_speed = attack_speed
+        self.critical_attack = critikal_attack
 
-    def first_attack(self):
+    def one_heand_attack(self):
         return ((self.attack + randint(*self.RANGE_VALUE_ATTACK))
-                * self.FIRST_ATTACK / self.deffence)
+                * self.ATTACK)
 
 
-class Warrior(Character):
-    pass
+class Sword(MelleeWeapon):
+    RANGE_VALUE_SPEED = (1, 10)
+
+    def ng_sword(self):
+        return self.one_heand_attack() * randint(*self.RANGE_VALUE_SPEED)
 
 
-mell = Character(28, 50)
-print(mell.first_attack())
+mell = Sword(28, 50, 20)
+print(mell.ng_sword())
